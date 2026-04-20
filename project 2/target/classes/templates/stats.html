@@ -1,0 +1,15 @@
+<h2>Registration Statistics</h2>
+
+<table border="1">
+    <tr>
+        <th>Event ID</th>
+        <th>Total Registrations</th>
+    </tr>
+
+    <tr th:each="s : ${stats}">
+        <td th:text="${s[0]}"></td>
+        <td th:text="${s[1]}"></td>
+    </tr>
+</table>
+
+<a href="/admin/dashboard">Back</a>
