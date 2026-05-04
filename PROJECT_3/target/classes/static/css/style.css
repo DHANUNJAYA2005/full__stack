@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #4cc9f0;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-main: #2b2d42;
+    --text-muted: #8d99ae;
+    --border-radius: 16px;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(67, 97, 238, 0.1);
+    --shadow-hover: 0 15px 35px rgba(67, 97, 238, 0.15);
+}
+
+body {
+    background-color: #f8f9fa;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.9)),
+        url('../images/campus_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Typography & General */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Navbar Customization with Glassmorphism */
+.navbar {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0px;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-main) !important;
+    font-weight: 500;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color) !important;
+}
+
+/* Enhanced Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 24px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+/* Modern Premium Cards */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.event-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.event-card .card-img-top {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.event-card .card-title {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.bg-info {
+    background-color: rgba(76, 201, 240, 0.15) !important;
+    color: #0077b6 !important;
+}
+
+.bg-secondary {
+    background-color: rgba(141, 153, 174, 0.15) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+}
+
+/* Chatbot Premium Styles */
+#chatbot-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 340px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-hover);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 450px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+#chatbot-container.collapsed {
+    height: 60px;
+    width: 250px;
+    border-radius: 30px;
+}
+
+#chatbot-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 18px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05rem;
+}
+
+#chatbot-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #fcfcfc;
+}
+
+.chat-message {
+    max-width: 85%;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.chat-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 18px 18px 2px 18px;
+}
+
+.chat-bot {
+    align-self: flex-start;
+    background-color: #f1f3f5;
+    color: var(--text-main);
+    border-radius: 18px 18px 18px 2px;
+}
+
+#chatbot-input {
+    display: flex;
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #f1f3f5;
+}
+
+#chatInput {
+    flex-grow: 1;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 10px 18px;
+    background-color: #f9fafb;
+    outline: none;
+    transition: all 0.2s;
+}
+
+#chatInput:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+#chatSendBtn {
+    background: var(--primary-color);
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+}
+
+#chatSendBtn:hover {
+    transform: scale(1.05);
+}
+
+/* Premium Calendar View */
+#calendar {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    font-family: 'Inter', sans-serif;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+    border-color: #f1f3f5;
+}
+
+.fc .fc-button-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.fc-event {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background: var(--success-color);
+    padding: 2px 4px;
+    font-weight: 500;
+}

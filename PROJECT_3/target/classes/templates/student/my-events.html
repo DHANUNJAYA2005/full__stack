@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Educational Event Management using Spring MVC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/"><i class="fas fa-university"></i> Educational Event Management using Spring MVC</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/student/dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="/events">Browse Events</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="/student/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>My Registered Events</h2>
+    <hr>
+    
+    <div th:if="${registrations.isEmpty()}" class="alert alert-info">
+        You haven't registered for any events yet. <a href="/events">Browse events here</a>.
+    </div>
+    
+    <div class="row g-4 mt-2">
+        <div class="col-md-6" th:each="reg : ${registrations}">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0" th:text="${reg.event.title}">Event Title</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-1"><i class="fas fa-calendar"></i> <span th:text="${reg.event.eventDate}">Date</span> | <i class="fas fa-clock"></i> <span th:text="${reg.event.time}">Time</span></p>
+                    <p class="mb-1"><i class="fas fa-map-marker-alt"></i> <span th:text="${reg.event.venue}">Venue</span></p>
+                    <p class="text-muted small">Registered on: <span th:text="${#temporals.format(reg.registeredAt, 'yyyy-MM-dd HH:mm')}">Date</span></p>
+                    
+                    <hr>
+                    
+                    <!-- Feedback Section -->
+                    <div th:if="${reg.feedback != null}">
+                        <p class="mb-1"><strong>Your Feedback:</strong> <span th:text="${reg.feedback}"></span></p>
+                        <p class="mb-0"><strong>Rating:</strong> 
+                            <span class="text-warning">
+                                <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, reg.rating)}"></i>
+                            </span>
+                        </p>
+                    </div>
+                    
+                    <div th:if="${reg.feedback == null}">
+                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" th:data-bs-target="'#feedbackForm' + ${reg.id}">
+                            Submit Feedback
+                        </button>
+                        <div class="collapse mt-2" th:id="'feedbackForm' + ${reg.id}">
+                            <form th:action="@{'/student/feedback/' + ${reg.id}}" method="post">
+                                <div class="mb-2">
+                                    <label class="form-label small">Rating (1-5)</label>
+                                    <select name="rating" class="form-select form-select-sm" required>
+                                        <option value="5">5 - Excellent</option>
+                                        <option value="4">4 - Good</option>
+                                        <option value="3">3 - Average</option>
+                                        <option value="2">2 - Poor</option>
+                                        <option value="1">1 - Terrible</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small">Feedback</label>
+                                    <textarea name="feedback" class="form-control form-control-sm" rows="2" maxlength="300"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
